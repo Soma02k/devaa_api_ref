@@ -91,6 +91,7 @@ reference_structure_api/
 ├── requirements.txt              # Project dependencies
 ├── .env                          # Local environment settings
 ├── .env.example                  # Environment template
+├── postman_collection.json       # Postman v2.1.0 importable collection
 ├── run.py                        # Application entry point
 ├── schema.sql                    # Database table SQL creation script
 └── README.md                     # Project documentation

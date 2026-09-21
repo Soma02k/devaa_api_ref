@@ -1,0 +1,168 @@
+{
+  "info": {
+    "_postman_id": "7f8e9d0a-1b2c-3d4e-5f6a-7b8c9d0e1f2a",
+    "name": "Reference Structure API - Phase 1",
+    "description": "Complete Postman collection for testing the 6 endpoints of Phase 1 reference_structure_api (Flask + SQLAlchemy + MySQL).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Create Employee (Full Info)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone\": \"9876543210\",\n  \"occupation\": \"Software Developer\",\n  \"designation\": \"Senior Developer\",\n  \"salary\": 75000,\n  \"city\": \"Kolkata\",\n  \"marital_status\": \"single\",\n  \"status\": \"active\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/employees",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "employees"
+          ]
+        },
+        "description": "Creates a complete employee record with all fields."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Create Employee (Basic Info)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"phone\": \"9876543211\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/employees/basic",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "employees",
+            "basic"
+          ]
+        },
+        "description": "Creates an employee record with minimal required info (name, email, phone)."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Get Employees with Pagination",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/employees?page=1&limit=10",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "employees"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "description": "Page number (1-indexed)"
+            },
+            {
+              "key": "limit",
+              "value": "10",
+              "description": "Items per page"
+            }
+          ]
+        },
+        "description": "Fetches a paginated list of employees along with pagination metadata."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Get Employee by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/employees/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "employees",
+            "1"
+          ]
+        },
+        "description": "Retrieves detailed information for a single employee by ID."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Update Employee",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Updated\",\n  \"designation\": \"Lead Developer\",\n  \"salary\": 90000,\n  \"city\": \"Bangalore\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/employees/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "employees",
+            "1"
+          ]
+        },
+        "description": "Updates specified fields of an existing employee by ID."
+      },
+      "response": []
+    },
+    {
+      "name": "6. Delete Employee",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/employees/1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "employees",
+            "1"
+          ]
+        },
+        "description": "Deletes an employee record by ID."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ]
+}
