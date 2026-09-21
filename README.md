@@ -6,9 +6,10 @@ A clean, production-ready backend reference project built with **Python**, **Fla
 
 ## 1. Project Overview & Purpose
 
-The purpose of `reference_structure_api` is to establish a modular, scalable, and maintainable backend foundation. 
+The purpose of `reference_structure_api` is to establish a modular, scalable, and maintainable backend foundation.
 
 ### Key Features (Phase 1):
+
 - **Layered Architecture**: Strict separation of concerns across Routes, Controllers, Services, Models, and Utilities.
 - **Standardized API Responses**: Every API returns a uniform JSON envelope (`status_code`, `is_success`, `message`, `data`).
 - **Reusable Pagination**: Centralized helper for offset/limit calculations, total counts, and total pages metadata.
@@ -46,6 +47,7 @@ Service -> Controller -> api_response() -> Client Response
 ```
 
 ### Component Responsibilities:
+
 - **Routes (`app/routes/`)**: Pure routing definitions connecting endpoints to controllers.
 - **Controllers (`app/controllers/`)**: Parse HTTP body/query params, execute input validation, invoke services, and wrap results with `api_response()`.
 - **Services (`app/services/`)**: Contain core business rules, database queries, and data mutations.
@@ -97,19 +99,21 @@ reference_structure_api/
 ## 4. Environment Configuration & Database Setup
 
 ### Environment Variables (`.env`)
+
 Database credentials are completely decoupled from Python code and loaded from `.env`:
 
 ```env
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
-DB_PASSWORD=Sksqlwork@26
+DB_PASSWORD=
 DB_NAME=Agentic_DB
 FLASK_ENV=development
 PORT=5000
 ```
 
 ### Database Schema (`schema.sql`)
+
 Run the following script in MySQL Workbench or Command Line to initialize `Agentic_DB`:
 
 ```sql
@@ -137,31 +141,35 @@ CREATE TABLE IF NOT EXISTS `employee_details` (
 ## 5. Installation & Execution
 
 ### 1. Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 2. Run Database Migration / Tables Initialization
+
 Ensure MySQL service is running on `localhost:3306`. The application will automatically verify and create missing tables on startup.
 
 ### 3. Run Application
+
 ```bash
 python run.py
 ```
+
 The server will start at `http://localhost:5000`.
 
 ---
 
 ## 6. API Reference (Phase 1)
 
-| Method | Endpoint | Description | Success Code |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/employees` | Create full employee record | `201 Created` |
-| `POST` | `/employees/basic` | Create minimal employee record (name, email, phone) | `201 Created` |
-| `GET` | `/employees?page=1&limit=10` | Get paginated employee list | `200 OK` |
-| `GET` | `/employees/<id>` | Get single employee details by ID | `200 OK` |
-| `PUT` | `/employees/<id>` | Partial or full employee update | `200 OK` |
-| `DELETE` | `/employees/<id>` | Delete employee record by ID | `200 OK` |
+| Method   | Endpoint                     | Description                                         | Success Code  |
+| :------- | :--------------------------- | :-------------------------------------------------- | :------------ |
+| `POST`   | `/employees`                 | Create full employee record                         | `201 Created` |
+| `POST`   | `/employees/basic`           | Create minimal employee record (name, email, phone) | `201 Created` |
+| `GET`    | `/employees?page=1&limit=10` | Get paginated employee list                         | `200 OK`      |
+| `GET`    | `/employees/<id>`            | Get single employee details by ID                   | `200 OK`      |
+| `PUT`    | `/employees/<id>`            | Partial or full employee update                     | `200 OK`      |
+| `DELETE` | `/employees/<id>`            | Delete employee record by ID                        | `200 OK`      |
 
 ---
 
@@ -170,6 +178,7 @@ The server will start at `http://localhost:5000`.
 ### Global Response Format
 
 **Success Response Envelope (`200 OK` / `201 Created`)**:
+
 ```json
 {
   "status_code": 200,
@@ -180,6 +189,7 @@ The server will start at `http://localhost:5000`.
 ```
 
 **Error Response Envelope (`400 Bad Request` / `404 Not Found` / `500 Error`)**:
+
 ```json
 {
   "status_code": 400,
@@ -194,7 +204,9 @@ The server will start at `http://localhost:5000`.
 ### Endpoints Detail
 
 #### 1. POST `/employees`
+
 **Request Body**:
+
 ```json
 {
   "name": "John Doe",
@@ -208,7 +220,9 @@ The server will start at `http://localhost:5000`.
   "status": "active"
 }
 ```
+
 **Response (`201 Created`)**:
+
 ```json
 {
   "status_code": 201,
@@ -232,7 +246,9 @@ The server will start at `http://localhost:5000`.
 ```
 
 #### 2. POST `/employees/basic`
+
 **Request Body**:
+
 ```json
 {
   "name": "Jane Doe",
@@ -240,7 +256,9 @@ The server will start at `http://localhost:5000`.
   "phone": "9876543211"
 }
 ```
+
 **Response (`201 Created`)**:
+
 ```json
 {
   "status_code": 201,
@@ -264,7 +282,9 @@ The server will start at `http://localhost:5000`.
 ```
 
 #### 3. GET `/employees?page=1&limit=10`
+
 **Response (`200 OK`)**:
+
 ```json
 {
   "status_code": 200,
@@ -298,7 +318,9 @@ The server will start at `http://localhost:5000`.
 ```
 
 #### 4. GET `/employees/<id>`
+
 **Response (`200 OK`)**:
+
 ```json
 {
   "status_code": 200,
@@ -322,7 +344,9 @@ The server will start at `http://localhost:5000`.
 ```
 
 #### 5. PUT `/employees/<id>`
+
 **Request Body**:
+
 ```json
 {
   "name": "John Updated",
@@ -331,7 +355,9 @@ The server will start at `http://localhost:5000`.
   "city": "Bangalore"
 }
 ```
+
 **Response (`200 OK`)**:
+
 ```json
 {
   "status_code": 200,
@@ -355,7 +381,9 @@ The server will start at `http://localhost:5000`.
 ```
 
 #### 6. DELETE `/employees/<id>`
+
 **Response (`200 OK`)**:
+
 ```json
 {
   "status_code": 200,
@@ -372,6 +400,7 @@ The server will start at `http://localhost:5000`.
 ### Endpoint Workflow Illustrations
 
 #### GET `/employees` Workflow
+
 ```text
 GET /employees?page=1&limit=10
       ↓
@@ -393,6 +422,7 @@ Client (200 OK with items & pagination metadata)
 ```
 
 #### GET `/employees/<id>` Workflow
+
 ```text
 GET /employees/10
       ↓
@@ -407,6 +437,7 @@ employee_service.py (Query Employee by ID)
 ```
 
 #### PUT `/employees/<id>` Workflow
+
 ```text
 PUT /employees/10
       ↓
@@ -426,6 +457,7 @@ Client
 ```
 
 #### DELETE `/employees/<id>` Workflow
+
 ```text
 DELETE /employees/10
       ↓
@@ -458,11 +490,13 @@ Client
 The project includes unit & integration tests built with **Pytest**.
 
 ### Run Test Suite
+
 ```bash
 pytest tests/test_employees.py -v
 ```
 
 All 23 test cases cover:
+
 - Successful creations (POST full & basic)
 - Required field validation & invalid email checks
 - Duplicate email prevention
